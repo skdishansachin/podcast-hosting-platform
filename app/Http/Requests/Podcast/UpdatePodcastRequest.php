@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Podcast;
 
-use App\Models\User;
-use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePodcastRequest extends FormRequest

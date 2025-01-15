@@ -16,6 +16,7 @@ class PodcastController extends Controller
     {
         Gate::authorize('viewAny', Podcast::class);
         $podcasts = $request->user()->podcasts();
+
         return PodcastResource::collection($podcasts);
     }
 
@@ -23,12 +24,14 @@ class PodcastController extends Controller
     {
         Gate::authorize('create', Podcast::class);
         $podcast = $request->user()->podcasts()->create($request);
+
         return PodcastResource::make($podcast);
     }
 
     public function show(Podcast $podcast)
     {
         Gate::authorize('view', $podcast);
+
         return PodcastResource::make($podcast);
     }
 
@@ -36,6 +39,7 @@ class PodcastController extends Controller
     {
         Gate::authorize('update', $podcast);
         $podcast = tap($podcast->update($request));
+
         return PodcastResource::make($podcast);
     }
 
@@ -43,6 +47,7 @@ class PodcastController extends Controller
     {
         Gate::authorize('delete', $podcast);
         $podcast->delete();
+
         return response()->noContent();
     }
 }
