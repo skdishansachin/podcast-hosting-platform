@@ -23,7 +23,7 @@ class PodcastController extends Controller
     public function store(StorePodcastRequest $request)
     {
         Gate::authorize('create', Podcast::class);
-        $podcast = $request->user()->podcasts()->create($request);
+        $podcast = $request->user()->podcasts()->create($request->validated());
 
         return PodcastResource::make($podcast);
     }
