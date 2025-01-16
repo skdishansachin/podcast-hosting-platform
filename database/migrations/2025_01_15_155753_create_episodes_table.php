@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Podcast::class)->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->text('description');
-            $table->string('audio_url');
+            $table->string('audio_file');
             $table->timestamps();
         });
     }

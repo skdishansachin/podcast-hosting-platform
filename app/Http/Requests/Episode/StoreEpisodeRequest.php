@@ -17,7 +17,7 @@ class StoreEpisodeRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
-            'audio_url' => ['required', File::types(['mp3', 'wav'])
+            'audio_file' => ['required', File::types(['mp3', 'wav'])
                 ->max('10mb'),
             ],
         ];
