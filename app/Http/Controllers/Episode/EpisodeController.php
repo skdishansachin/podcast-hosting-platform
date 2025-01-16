@@ -8,12 +8,14 @@ use App\Http\Requests\Episode\UpdateEpisodeRequest;
 use App\Http\Resources\Episode\EpisodeResource;
 use App\Models\Episode;
 use App\Models\Podcast;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class EpisodeController extends Controller
 {
     public function index(Podcast $podcast)
     {
+        Gate::authorize('viewAny', Episode::class);
         $episodes = $podcast->episodes()->paginate(10);
 
         return EpisodeResource::collection($episodes);
@@ -21,6 +23,8 @@ class EpisodeController extends Controller
 
     public function store(StoreEpisodeRequest $request, Podcast $podcast)
     {
+        Gate::authorize('create', [Episode::class, $podcast]);
+
         $path = Storage::putFile('episodes', $request->file('audio_file'));
         $episode = $podcast->episodes()->create([
             'title' => $request->title,
@@ -33,11 +37,13 @@ class EpisodeController extends Controller
 
     public function show(Episode $episode)
     {
+        Gate::authorize('view', $episode);
         return EpisodeResource::make($episode);
     }
 
     public function update(UpdateEpisodeRequest $request, Episode $episode)
     {
+        Gate::authorize('update', $episode);
         if (! $request->file('audio_file')) {
             $episode = tap($episode)->update($request->validated());
 
@@ -57,6 +63,7 @@ class EpisodeController extends Controller
 
     public function destroy(Episode $episode)
     {
+        Gate::authorize('delete', $episode);
         Storage::delete($episode->audio_file);
         
         $episode->delete();
