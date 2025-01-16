@@ -29,7 +29,7 @@ test('authenticated user can create a podcast', function () {
     $user = User::factory()->create();
 
     $title = fake()->sentence;
-    $description = fake()->paragraph;
+    $description = fake()->paragraph(nbSentences: 1);
 
     $response = actingAs($user)->postJson(route('podcasts.store'), [
         'title' => $title,
