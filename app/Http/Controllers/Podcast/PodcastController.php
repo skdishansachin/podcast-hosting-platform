@@ -38,7 +38,7 @@ class PodcastController extends Controller
     public function update(UpdatePodcastRequest $request, Podcast $podcast)
     {
         Gate::authorize('update', $podcast);
-        $podcast = tap($podcast->update($request));
+        $podcast = tap($podcast)->update($request);
 
         return PodcastResource::make($podcast);
     }
