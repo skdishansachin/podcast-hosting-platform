@@ -8,10 +8,10 @@ use Illuminate\Support\Str;
 
 class EpisodeFactory extends Factory
 {
-
     public function getAudioFileName(): string
     {
         $audioFileName = Str::random();
+
         return "'$audioFileName'.mp3";
     }
 

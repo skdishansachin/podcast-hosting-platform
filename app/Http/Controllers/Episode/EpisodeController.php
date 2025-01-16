@@ -14,12 +14,14 @@ class EpisodeController extends Controller
     public function index(Podcast $podcast)
     {
         $episodes = $podcast->episodes();
+
         return EpisodeResource::collection($episodes);
     }
 
     public function store(StoreEpisodeRequest $request, Podcast $podcast)
     {
         $episode = $podcast->episodes()->create($request->validated());
+
         return EpisodeResource::make($episode);
     }
 
@@ -31,12 +33,14 @@ class EpisodeController extends Controller
     public function update(UpdateEpisodeRequest $request, Episode $episode)
     {
         $episode = tap($episode)->update($request->validated());
+
         return EpisodeResource::make($episode);
     }
 
     public function destroy(Episode $episode)
     {
         $episode->delete();
+
         return response()->noContent();
     }
 }

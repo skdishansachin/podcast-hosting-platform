@@ -18,7 +18,7 @@ class UpdateEpisodeRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
             'audio_url' => ['required', File::types(['mp3', 'wav'])
-                ->max('10mb')
+                ->max('10mb'),
             ],
         ];
     }
