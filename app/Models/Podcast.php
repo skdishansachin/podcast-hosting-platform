@@ -11,7 +11,7 @@ class Podcast extends Model
 {
     use HasFactory;
 
-    protected $guared = ['id'];
+    protected $guarded = ['id'];
 
     public function user(): BelongsTo
     {
