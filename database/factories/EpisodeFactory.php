@@ -21,7 +21,7 @@ class EpisodeFactory extends Factory
             'podcast_id' => Podcast::factory(),
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(nbSentences: 1),
-            'audio_url' => $this->getAudioFileName(),
+            'audio_file' => $this->getAudioFileName(),
         ];
     }
 }
